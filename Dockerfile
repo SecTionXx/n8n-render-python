@@ -1,35 +1,6 @@
-# Dockerfile ใช้ Python Base Image
-FROM python:3.12-alpine
+FROM n8nio/n8n:latest
 
-# Install Node.js และ npm (สำหรับ n8n)
-RUN apk add --no-cache nodejs npm curl
-
-# Install n8n globally
-RUN npm install -g n8n
-
-# Install Python packages (ไม่มี PEP 668 issues)
-RUN pip install --no-cache-dir \
-    typhoon-ocr \
-    requests \
-    pillow \
-    pdf2image \
-    pytesseract
-
-# Create node user (ตาม n8n standard)
-RUN addgroup -g 1000 node && \
-    adduser -u 1000 -G node -s /bin/sh -D node
-
-# Create directories
-RUN mkdir -p /app/doc /home/node/.n8n && \
-    chown -R node:node /app /home/node
-
-# Set environment variables
-ENV N8N_USER_FOLDER="/home/node/.n8n"
-ENV PYTHONPATH="/usr/local/lib/python3.12/site-packages"
-ENV PYTHON_EXECUTABLE="/usr/bin/python3"
-
-# Switch to node user
-USER node
+# Set working directory
 WORKDIR /home/node
 
 # Expose port
