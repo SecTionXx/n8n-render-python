@@ -10,15 +10,15 @@ services:
   - key: NODE_ENV
     value: production
   - key: N8N_USER_FOLDER
-    value: /home/node/.n8n
+    value: /opt/render/.n8n
   - key: N8N_PROTOCOL
     value: https
   - key: N8N_PORT
-    value: "5678"
+    value: "443"
   - key: N8N_HOST
-    sync: false
+    value: n8n-0yly.onrender.com
   - key: N8N_EDITOR_BASE_URL
-    sync: false
+    value: https://n8n-0yly.onrender.com
   - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
     value: "false"
   - key: NODE_OPTIONS
@@ -30,7 +30,7 @@ services:
   region: singapore
   disk:
     name: disk
-    mountPath: /home/node/.n8n
+    mountPath: /opt/render/.n8n
     sizeGB: 1
   autoDeployTrigger: commit
 version: "1"
