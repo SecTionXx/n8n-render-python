@@ -2,9 +2,7 @@
 services:
 - type: web
   name: n8n
-  runtime: image
-  image:
-    url: docker.n8n.io/n8nio/n8n:latest
+  runtime: docker
   plan: starter
   envVars:
   - key: GENERIC_TIMEZONE
