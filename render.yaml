@@ -22,11 +22,17 @@ services:
   - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
     value: "false"
   - key: NODE_OPTIONS
-    value: "--max-old-space-size=460"
+    value: "--max-old-space-size=400 --optimize-for-size"
   - key: N8N_LOG_LEVEL
-    value: "warn"
+    value: "error"
   - key: N8N_DISABLE_PRODUCTION_MAIN_PROCESS
     value: "true"
+  - key: N8N_SKIP_WEBHOOK_DEREGISTRATION_SHUTDOWN
+    value: "true"
+  - key: N8N_DISABLE_UI
+    value: "false"
+  - key: N8N_METRICS
+    value: "false"
   region: singapore
   disk:
     name: disk
