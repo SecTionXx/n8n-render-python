@@ -22,7 +22,7 @@ services:
   - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
     value: "false"
   - key: NODE_OPTIONS
-    value: "--max-old-space-size=400 --optimize-for-size"
+    value: "--max-old-space-size=350"
   - key: N8N_LOG_LEVEL
     value: "error"
   - key: N8N_DISABLE_PRODUCTION_MAIN_PROCESS
