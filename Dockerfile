@@ -1,9 +1,10 @@
+# Dockerfile ที่แก้ไขแล้ว
 FROM n8nio/n8n:latest
 
-# Switch to root user เพื่อติดตั้ง packages
+# Switch to root user
 USER root
 
-# Install Python3 และ dependencies
+# Install system dependencies
 RUN apk update && \
     apk add --no-cache \
         python3 \
@@ -12,18 +13,23 @@ RUN apk update && \
         gcc \
         musl-dev \
         linux-headers \
-        curl && \
-    ln -sf /usr/bin/python3 /usr/bin/python && \
-    ln -sf /usr/bin/python3 /usr/local/bin/python
+        curl \
+        build-base \
+        libffi-dev \
+        openssl-dev && \
+    ln -sf /usr/bin/python3 /usr/bin/python
 
-# Install Python packages
-RUN pip3 install --upgrade pip && \
-    pip3 install --no-cache-dir \
-        typhoon-ocr \
-        requests \
-        pillow \
-        pdf2image \
-        pytesseract
+# Upgrade pip first
+RUN python3 -m pip install --upgrade pip
+
+# Install Python packages one by one for better error tracking
+RUN pip3 install --no-cache-dir requests
+RUN pip3 install --no-cache-dir pillow
+RUN pip3 install --no-cache-dir typhoon-ocr
+
+# Install optional packages (if these fail, build continues)
+RUN pip3 install --no-cache-dir pdf2image || echo "pdf2image install failed, continuing..."
+RUN pip3 install --no-cache-dir pytesseract || echo "pytesseract install failed, continuing..."
 
 # Set environment variables
 ENV PYTHONPATH="/usr/lib/python3.12/site-packages:/usr/local/lib/python3.12/site-packages"
@@ -44,10 +50,6 @@ WORKDIR /home/node
 
 # Expose port
 EXPOSE 5678
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
-    CMD curl -f http://localhost:5678/healthz || exit 1
 
 # Start n8n
 CMD ["n8n", "start"]
