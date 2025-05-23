@@ -21,6 +21,12 @@ services:
     sync: false
   - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
     value: "false"
+  - key: NODE_OPTIONS
+    value: "--max-old-space-size=460"
+  - key: N8N_LOG_LEVEL
+    value: "warn"
+  - key: N8N_DISABLE_PRODUCTION_MAIN_PROCESS
+    value: "true"
   region: singapore
   disk:
     name: disk
