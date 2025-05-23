@@ -3,7 +3,7 @@ FROM n8nio/n8n:latest
 # Set environment variables for memory optimization
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 ENV N8N_USER_FOLDER=/opt/render/.n8n
-ENV NODE_OPTIONS="--max-old-space-size=400 --optimize-for-size"
+ENV NODE_OPTIONS="--max-old-space-size=350"
 
 # Create the correct directory structure
 USER root
