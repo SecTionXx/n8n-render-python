@@ -4,8 +4,6 @@ n8n automation platform with Python3 and OCR capabilities for Render deployment.
 
 ## Features
 - n8n latest version
-- Python3 with pip
-- typhoon-ocr for PDF processing
 - All required dependencies
 - Ready for Render deployment
 
