@@ -1,11 +1,7 @@
 FROM n8nio/n8n:latest
 
-# Use the default user and working directory from n8n image
-USER node
-WORKDIR /home/node
+# Set environment variables
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
-# Expose port
-EXPOSE 5678
-
-# Start n8n
-CMD ["n8n", "start"]
+# Use the default entrypoint and command from n8n image
+# The n8n image already has the correct entrypoint configured
