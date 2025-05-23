@@ -1,0 +1,45 @@
+# Exported from Render on 2025-05-23T10:37:22Z
+# Modified to use custom Dockerfile with Python support
+services:
+- type: web
+  name: n8n
+  runtime: docker
+  plan: starter
+  envVars:
+  - key: PYTHON_EXECUTABLE
+    value: /usr/bin/python3
+    sync: false
+  - key: GENERIC_TIMEZONE
+    value: Asia/Bangkok
+    sync: false
+  - key: NODE_ENV
+    value: production
+    sync: false
+  - key: TYPHOON_OCR_API_KEY
+    sync: false
+  - key: N8N_USER_FOLDER
+    value: /home/node/.n8n
+    sync: false
+  - key: N8N_PROTOCOL
+    value: https
+    sync: false
+  - key: N8N_PORT
+    value: "5678"
+    sync: false
+  - key: N8N_HOST
+    sync: false
+  - key: N8N_EDITOR_BASE_URL
+    sync: false
+  - key: N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE
+    value: "true"
+    sync: false
+  - key: PYTHONPATH
+    value: /usr/lib/python3.12/site-packages:/usr/local/lib/python3.12/site-packages
+    sync: false
+  region: singapore
+  disk:
+    name: disk
+    mountPath: /home/node/.n8n
+    sizeGB: 1
+  autoDeployTrigger: commit
+version: "1"
