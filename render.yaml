@@ -1,19 +1,14 @@
-# Exported from Render on 2025-05-23T10:37:22Z
-# Modified to use custom Dockerfile with Python support
+# Basic n8n deployment configuration for Render
 services:
 - type: web
   name: n8n
   runtime: docker
   plan: starter
   envVars:
-  - key: PYTHON_EXECUTABLE
-    value: /usr/bin/python3
   - key: GENERIC_TIMEZONE
     value: Asia/Bangkok
   - key: NODE_ENV
     value: production
-  - key: TYPHOON_OCR_API_KEY
-    sync: false
   - key: N8N_USER_FOLDER
     value: /home/node/.n8n
   - key: N8N_PROTOCOL
@@ -24,10 +19,6 @@ services:
     sync: false
   - key: N8N_EDITOR_BASE_URL
     sync: false
-  - key: N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE
-    value: "true"
-  - key: PYTHONPATH
-    value: /usr/lib/python3.12/site-packages:/usr/local/lib/python3.12/site-packages
   region: singapore
   disk:
     name: disk
